@@ -1,5 +1,6 @@
 # System Programming
-# Lab 1:
+---
+## Lab №1:
   * Studying event-driven architecture of windows applications, message handling mechanism, window drawing mechanism.
     - Develop a program that allows you to move a sprite using keyboard and mouse inside the working area of the window. 
     - Ensure the operation of the mouse wheel. 
@@ -12,4 +13,5 @@
     - Придать спрайту движение с отскоком от границ окна. 
     - Использовать горячие клавиши. 
     - Использовать сочетание клавиш с использованием таблиц акселлерации.
------------------------------------------------------------------------------------------------------------------------
+---
+## Lab №2
