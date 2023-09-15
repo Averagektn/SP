@@ -42,8 +42,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
-	case WM_NCLBUTTONDBLCLK:
-		MessageBox(hWnd, L"Hello, world", L"Message", MB_OK);
+	case WM_LBUTTONDOWN:
+		MessageBoxW(hWnd, L"Hello WINAPI", L"CAPTION", MB_OK);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
