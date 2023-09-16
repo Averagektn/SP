@@ -3,6 +3,7 @@
 // Used by lab1.rc
 //
 #define IDR_ACCELERATOR1                101
+#define ID_ACCELERATOR_NEXT_SPRITE      40001
 #define NEXT_SPRITE                     40001
 #define PREV_SPRITE                     40003
 
