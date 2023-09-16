@@ -403,3 +403,7 @@ FodyWeavers.xsd
 *.log
 *.err
 *.pptx
+*.bmp 
+*.png 
+*.txt
+*.jpg
