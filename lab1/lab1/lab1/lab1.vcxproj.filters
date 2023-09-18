@@ -27,6 +27,18 @@
     <Image Include="sprite_2000ml.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="sprite_1000ml.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="beer-bottle.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="coca-cola.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="fanta.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h">
@@ -39,9 +51,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="resource1.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

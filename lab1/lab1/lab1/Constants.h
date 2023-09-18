@@ -4,8 +4,7 @@ namespace ProjConst {
 	// NAMES
 	const wchar_t* PROJ_NAME = L"Tracker";
 	const wchar_t* WND_CAPTION = L"THIS SPRITE IS MOVING OMG!!!!!!!";
-	const wchar_t* PIC_NAMES[] = { L"sprite_500ml.png", L"sprite_1000ml.jpg", 
-		L"sprite_1500ml.png", L"sprite_2000ml.png"};
+	const wchar_t* PIC_NAMES[] = { L"sprite_500ml.png", L"coca-cola.png", L"fanta.png", L"beer-bottle.png"};
 	
 	// DRAWING
 	const int SPEED = 5;
@@ -15,7 +14,7 @@ namespace ProjConst {
 	const int WND_DEF_WIDTH = 600;
 	
 	const int TOTAL_PICTURES = 4;
-	const int PIC_WIDTH = 100;
+	const int PIC_WIDTH = 120;
 	const int PIC_HEIGHT = 150;
 	const int PIC_INITIAL_X = 50;
 	const int PIC_INITIAL_Y = 50;

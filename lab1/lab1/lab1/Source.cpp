@@ -5,6 +5,9 @@
 #include "Functions.h"
 #include "resource.h"
 
+// all buttons generate redraw
+// double buffer doesn't work, work worse than single buffer
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
@@ -59,13 +62,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) { 
-	HDC hdc, memDC;
+	HDC hdc;// , memDC;
 	PAINTSTRUCT ps;
 	RECT rect = {ProjConst::PIC_INITIAL_X, ProjConst::PIC_INITIAL_Y, 
 		ProjVars::x + ProjConst::PIC_WIDTH, ProjVars::y + ProjConst::PIC_HEIGHT};
 	HKL hkl;
-	HBITMAP memBMP;
-	HGDIOBJ hOld;
+	//HBITMAP memBMP;
+	//HGDIOBJ hOld;
 
 	switch (message) {
 	case WM_CHAR:
@@ -77,7 +80,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			DrawFuncs::ProcessEngLayout(wParam);
 		}
 		rect = ProjFuncs::GetRect();
-		InvalidateRect(hWnd, &rect, true);
+		InvalidateRect(hWnd, &rect, RDW_UPDATENOW | RDW_INVALIDATE);
+		//InvalidateRect(hWnd, &rect, true);
 		break;
 	case WM_MOUSEWHEEL:
 		if (GetAsyncKeyState(VK_LSHIFT)) {

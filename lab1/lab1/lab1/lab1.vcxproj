@@ -135,6 +135,10 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="beer-bottle.png" />
+    <Image Include="coca-cola.png" />
+    <Image Include="fanta.png" />
+    <Image Include="sprite_1000ml.bmp" />
     <Image Include="sprite_1000ml.jpg" />
     <Image Include="sprite_1500ml.png" />
     <Image Include="sprite_2000ml.png" />
@@ -144,7 +148,6 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
     <ClInclude Include="Variables.h" />
   </ItemGroup>
   <ItemGroup>
