@@ -138,10 +138,6 @@
     <Image Include="beer-bottle.png" />
     <Image Include="coca-cola.png" />
     <Image Include="fanta.png" />
-    <Image Include="sprite_1000ml.bmp" />
-    <Image Include="sprite_1000ml.jpg" />
-    <Image Include="sprite_1500ml.png" />
-    <Image Include="sprite_2000ml.png" />
     <Image Include="sprite_500ml.png" />
   </ItemGroup>
   <ItemGroup>

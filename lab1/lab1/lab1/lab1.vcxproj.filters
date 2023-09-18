@@ -18,18 +18,6 @@
     <Image Include="sprite_500ml.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="sprite_1000ml.jpg">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="sprite_1500ml.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="sprite_2000ml.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="sprite_1000ml.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
     <Image Include="beer-bottle.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>

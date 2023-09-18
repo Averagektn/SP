@@ -41,8 +41,11 @@ namespace DrawFuncs {
 	void DrawImage(HDC hdc, int x, int y) {
 		Gdiplus::Graphics graphics(hdc);
 		Gdiplus::Bitmap bmp(ProjFuncs::GetCurrPicName());
+		//Gdiplus::Pen pen(RGB*(255, 0, 0));
+		//PEN pen{ RGB(255, 0 ,0) };
 
 		graphics.DrawImage(&bmp, x, y, ProjConst::PIC_WIDTH, ProjConst::PIC_HEIGHT);
+		//graphics.DrawRectangle(x, y, ProjConst::PIC_WIDTH, ProjConst::PIC_HEIGHT)
 	}
 
 	void DoubleBufferedPaint(HWND hWnd, HDC hdc) {
