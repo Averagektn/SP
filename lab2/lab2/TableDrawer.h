@@ -2,7 +2,6 @@
 
 #include <windows.h>
 #include <vector>
-#include <gdiplus.h>
 
 class TableDrawer
 {
@@ -15,6 +14,8 @@ public:
 private:
 	const int TEXT_FORMAT_DRAW = DT_LEFT | DT_WORDBREAK | DT_WORD_ELLIPSIS;
 	const int TEXT_FORMAT_COUNT = DT_LEFT | DT_WORDBREAK | DT_CALCRECT | DT_WORD_ELLIPSIS;
+	const int LEFT_OFFSET = 3;
+	const int LETTER_SIZE = 20 + LEFT_OFFSET;
 
 	HDC hdc;
 	std::vector<RECT> cell;
@@ -23,6 +24,7 @@ private:
 	int columns;
 	int wndWidth;
 	int wndHeight;
+	int tableHeight;
 
 	int getCellInd(int row, int column);
 	int getColWidth();

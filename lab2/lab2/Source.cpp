@@ -52,8 +52,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	int height = wndRect.bottom - wndRect.top;
 	TableDrawer table(ProjConst::ROWS, ProjConst::COLUMNS, width, height, ProjConst::TEXT);
 
-
-
 	switch (message) 
 	{
 	case WM_SIZE:

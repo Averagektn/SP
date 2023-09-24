@@ -4,13 +4,14 @@ TableDrawer::TableDrawer(int rows, int columns, int width, int height, const LPC
 {
 	this->rows = rows;
 	this->columns = columns;
-	wndWidth = width;
+	wndWidth = width - LETTER_SIZE;
 	wndHeight = height;
 	hdc = NULL;
 	for (int i = 0; i < rows * columns; i++)
 	{
 		this->text.push_back(text[i]);
 	}
+	tableHeight = 0;
 }
 
 void TableDrawer::draw()
@@ -54,23 +55,28 @@ void TableDrawer::drawRow(int row, int rowHeight)
 void TableDrawer::drawCell(int row, int column)
 {
 	int ind = getCellInd(row, column);
+	cell[ind].left += LEFT_OFFSET;
+	cell[ind].right += LEFT_OFFSET;
 	DrawText(hdc, text[ind], -1, &cell[ind], TEXT_FORMAT_DRAW);
 }
 
 void TableDrawer::drawBorders()
 {
-	Gdiplus::Graphics graphics(hdc);
-	Gdiplus::Pen pen(RGB(255, 0, 0));
-	graphics.DrawLine(&pen, 0, 0, 200, 200);
-	//for (int column = 0; column < columns - 1; column++)
-	//{
-	//	graphics.DrawLine(&pen, cell[column].right, 0, cell[column].right, wndHeight);
-	//}
+	HPEN pen = CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
 
-	//for (int row = 0; row < rows; row++)
-	//{
-	//	graphics.DrawLine(&pen, 0, cell[row].bottom, wndWidth, cell[row].bottom);
-	//}
+	for (int column = 1; column < columns; column++)
+	{
+		MoveToEx(hdc, column * getColWidth(), 0, NULL);
+		LineTo(hdc, column * getColWidth(), tableHeight);
+	}
+
+	for (int row = 1; row < rows; row++)
+	{
+		MoveToEx(hdc, 0, cell[row * columns].bottom - cell[row * columns].top, NULL);
+		LineTo(hdc, wndWidth + LETTER_SIZE, cell[row * columns].bottom - cell[row * columns].top);
+	}
+	MoveToEx(hdc, 0, tableHeight, NULL);
+	LineTo(hdc, wndWidth + LETTER_SIZE, tableHeight);
 }
 
 void TableDrawer::setRowHeight(int row, int rowHeight)
@@ -96,12 +102,16 @@ int TableDrawer::getRowHeight(int row)
 	for (int column = 0; column < columns; column++)
 	{
 		int ind = getCellInd(row, column);
+		
 		currCellHeight = DrawText(hdc, text[ind], -1, &cell[ind], TEXT_FORMAT_COUNT);
+
 		if (currCellHeight > rowHeight)
 		{
 			rowHeight = currCellHeight;
 		}
 	}
+
+	tableHeight += rowHeight;
 
 	return rowHeight;
 }
