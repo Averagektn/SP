@@ -1,4 +1,5 @@
 #pragma once
+
 namespace ProjConst 
 {
 	const int WND_INI_WIDTH = 800;

@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <gdiplus.h>
 #include "TableDrawer.h"
 #include "Constant.h"
 
@@ -46,21 +45,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	PAINTSTRUCT ps;
-	TableDrawer drawer(ProjConst::ROWS, ProjConst::COLUMNS, ProjConst::WND_INI_WIDTH, ProjConst::TEXT);
 	RECT wndRect;
+
+	GetWindowRect(hWnd, &wndRect);
+	int width = wndRect.right - wndRect.left;
+	int height = wndRect.bottom - wndRect.top;
+	TableDrawer table(ProjConst::ROWS, ProjConst::COLUMNS, width, height, ProjConst::TEXT);
+
+
 
 	switch (message) 
 	{
 	case WM_SIZE:
-		GetWindowRect(hWnd, &wndRect);
-		drawer.setWidth(wndRect.right);
 		InvalidateRect(hWnd, NULL, true);
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		
-		drawer.setHDC(hdc);
-		drawer.draw();
+
+		table.setHDC(hdc);
+		table.draw();
 
 		EndPaint(hWnd, &ps);
 		break;
