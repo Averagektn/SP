@@ -1,6 +1,7 @@
 #include <windows.h>
-#include "TableDrawer.h"
 #include "Constant.h"
+#include "TableDrawer.h"
+#include "TextFormatter.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -51,7 +52,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	int width = wndRect.right - wndRect.left;
 	int height = wndRect.bottom - wndRect.top;
 	TableDrawer table(ProjConst::ROWS, ProjConst::COLUMNS, width, height, ProjConst::TEXT);
-
+	
 	switch (message) 
 	{
 	case WM_SIZE:
@@ -62,6 +63,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		table.setHDC(hdc);
 		table.draw();
+
+		TextFormatter::drawEllipticalText(hdc, TextFormatter::ELLIPTICAL_TEXT, TextFormatter::COORD_X, 
+			TextFormatter::COORD_Y, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H);
 
 		EndPaint(hWnd, &ps);
 		break;
