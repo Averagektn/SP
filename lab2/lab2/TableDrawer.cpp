@@ -1,11 +1,14 @@
 #include "TableDrawer.h"
 
-TableDrawer::TableDrawer(int rows, int columns, int width, int height, const LPCWSTR text[])
+// rows - number of rows
+// columns - number of columns
+// width - table width
+// text - sentences to be written
+TableDrawer::TableDrawer(int rows, int columns, int width, const LPCWSTR text[])
 {
 	this->rows = rows;
 	this->columns = columns;
 	wndWidth = width - LETTER_SIZE;
-	wndHeight = height;
 	hdc = NULL;
 	for (int i = 0; i < rows * columns; i++)
 	{
@@ -14,6 +17,7 @@ TableDrawer::TableDrawer(int rows, int columns, int width, int height, const LPC
 	tableHeight = 0;
 }
 
+// Draws table
 void TableDrawer::draw()
 {
 	createCells();
@@ -27,6 +31,7 @@ void TableDrawer::draw()
 	drawBorders();
 }
 
+// Fills cells with coordinates
 void TableDrawer::createCells()
 {
 	for (int i = 0; i < rows * columns; i++)
@@ -37,6 +42,9 @@ void TableDrawer::createCells()
 	}
 }
 
+// Draws one row of the table
+// row - row number to draw
+// rowHeight - maximum height of cell of the row
 void TableDrawer::drawRow(int row, int rowHeight)
 {
 	setRowHeight(row, rowHeight);
@@ -52,6 +60,9 @@ void TableDrawer::drawRow(int row, int rowHeight)
 	}
 }
 
+// Draws selected cell
+// row - selected row
+// column - selected column
 void TableDrawer::drawCell(int row, int column)
 {
 	int ind = getCellInd(row, column);
@@ -60,6 +71,7 @@ void TableDrawer::drawCell(int row, int column)
 	DrawText(hdc, text[ind], -1, &cell[ind], TEXT_FORMAT_DRAW);
 }
 
+// Draws border of the table
 void TableDrawer::drawBorders()
 {
 	HPEN pen = CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
@@ -81,6 +93,7 @@ void TableDrawer::drawBorders()
 	}
 }
 
+// Sets the height of all cells in the row
 void TableDrawer::setRowHeight(int row, int rowHeight)
 {
 	for (int column = 0; column < columns; column++)
@@ -90,12 +103,13 @@ void TableDrawer::setRowHeight(int row, int rowHeight)
 	}
 }
 
+// Returns column width
 int TableDrawer::getColWidth()
 {
 	return wndWidth / columns;
 }
 
-
+// Returns row height
 int TableDrawer::getRowHeight(int row)
 {
 	int rowHeight = 0;
@@ -118,11 +132,13 @@ int TableDrawer::getRowHeight(int row)
 	return rowHeight;
 }
 
+// Returns cell as array index
 int TableDrawer::getCellInd(int row, int column)
 {
 	return row * columns + column;
 }
 
+// Provides device context handle to draw
 void TableDrawer::setHDC(HDC hdc)
 {
 	this->hdc = hdc;

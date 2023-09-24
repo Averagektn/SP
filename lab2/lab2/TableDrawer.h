@@ -3,10 +3,11 @@
 #include <windows.h>
 #include <vector>
 
+// Used to draw text in a table
 class TableDrawer
 {
 public:
-	TableDrawer(int rows, int columns, int width, int height, const LPCWSTR text[]);
+	TableDrawer(int rows, int columns, int width, const LPCWSTR text[]);
 
 	void draw();
 	void setHDC(HDC hdc);
@@ -23,7 +24,6 @@ private:
 	int rows;
 	int columns;
 	int wndWidth;
-	int wndHeight;
 	int tableHeight;
 
 	int getCellInd(int row, int column);

@@ -9,10 +9,15 @@ namespace TextFormatter
 	const int RADIUS_H = 250;
 	const double PI = 3.14;
 
+	// Draws formatted text. Elliptic text
+	// hdc - device context
+	// text - drawn text
+	// centerX, centerY - central point of ellipse
+	// vRadius, hRadius - reiuses of ellipse
 	void drawEllipticalText(HDC hdc, const wchar_t* text, int centerX, int centerY, int vRadius, int hRadius)
 	{
 		XFORM xForm;
-		int textLength = wcslen(text);
+		size_t textLength = wcslen(text);
 		double angleStep = 2 * PI / textLength;
 
 		SetGraphicsMode(hdc, GM_ADVANCED);
@@ -23,12 +28,12 @@ namespace TextFormatter
 			int y = static_cast<int>(centerY + vRadius * sin(i * angleStep - PI / 2));
 			double rotationAngle = -(i * angleStep);
 
-			xForm.eM11 = cos(rotationAngle);
-			xForm.eM12 = -sin(rotationAngle);
-			xForm.eM21 = sin(rotationAngle);
-			xForm.eM22 = cos(rotationAngle);
-			xForm.eDx = x;
-			xForm.eDy = y;
+			xForm.eM11 = (FLOAT)cos(rotationAngle);
+			xForm.eM12 = (FLOAT) - sin(rotationAngle);
+			xForm.eM21 = (FLOAT)sin(rotationAngle);
+			xForm.eM22 = (FLOAT)cos(rotationAngle);
+			xForm.eDx = (FLOAT)x;
+			xForm.eDy = (FLOAT)y;
 
 			SetWorldTransform(hdc, &xForm);
 

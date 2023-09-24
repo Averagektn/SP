@@ -50,8 +50,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	GetWindowRect(hWnd, &wndRect);
 	int width = wndRect.right - wndRect.left;
-	int height = wndRect.bottom - wndRect.top;
-	TableDrawer table(ProjConst::ROWS, ProjConst::COLUMNS, width, height, ProjConst::TEXT);
+	TableDrawer table(ProjConst::ROWS, ProjConst::COLUMNS, width, ProjConst::TEXT);
 	
 	switch (message) 
 	{
