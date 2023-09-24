@@ -2,11 +2,11 @@
 
 namespace TextFormatter 
 {
-	const wchar_t* ELLIPTICAL_TEXT = L"HELLO, WORLD!";
+	const wchar_t* ELLIPTICAL_TEXT = L"Тут могла бы быть ваша реклама";
 	const int COORD_X = 400;
-	const int COORD_Y = 400;
-	const int RADIUS_V = 100;
-	const int RADIUS_H = 200;
+	const int COORD_Y = 350;
+	const int RADIUS_V = 200;
+	const int RADIUS_H = 250;
 	const double PI = 3.14;
 
 	void drawEllipticalText(HDC hdc, const wchar_t* text, int centerX, int centerY, int vRadius, int hRadius)

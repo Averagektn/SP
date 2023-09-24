@@ -18,8 +18,8 @@ namespace ProjConst
 
 	const LPCWSTR TEXT[]
 	{
-		L"TESTTWOLINES 111111111 1111 1111 1111 1111 1111 1111 1111 1111", L"A", L"A",
-		L"A", L"A", L"A",
-		L"A", L"A", L"TESTTWOLINES 111111111 1111 1111 1111 1111 1111 1111 1111 1111",
+		L"Dude, did you think something was gonna happen here? Ohhhh, no, you stink of **** even from here.", L" Close  ", L"it",
+		L", close ", L"the video,", L" **** you. ,",
+		L"Friend of a cool friend, ", L"you ****** up *****", L"aaaaaaah ****, aaaaah.",
 	};
 }

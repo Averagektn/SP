@@ -63,6 +63,7 @@ void TableDrawer::drawCell(int row, int column)
 void TableDrawer::drawBorders()
 {
 	HPEN pen = CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
+	int currRow = 0;
 
 	for (int column = 1; column < columns; column++)
 	{
@@ -70,13 +71,14 @@ void TableDrawer::drawBorders()
 		LineTo(hdc, column * getColWidth(), tableHeight);
 	}
 
-	for (int row = 1; row < rows; row++)
+	tableHeight = 0;
+
+	for (int row = 0; row < rows; row++)
 	{
-		MoveToEx(hdc, 0, cell[row * columns].bottom - cell[row * columns].top, NULL);
-		LineTo(hdc, wndWidth + LETTER_SIZE, cell[row * columns].bottom - cell[row * columns].top);
+		currRow += getRowHeight(row);
+		MoveToEx(hdc, 0, currRow, NULL);
+		LineTo(hdc, wndWidth + LETTER_SIZE, currRow);
 	}
-	MoveToEx(hdc, 0, tableHeight, NULL);
-	LineTo(hdc, wndWidth + LETTER_SIZE, tableHeight);
 }
 
 void TableDrawer::setRowHeight(int row, int rowHeight)
