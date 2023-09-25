@@ -47,6 +47,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	HDC hdc;
 	PAINTSTRUCT ps;
 	RECT wndRect;
+	SIZE letterSize;
 
 	GetWindowRect(hWnd, &wndRect);
 	int width = wndRect.right - wndRect.left;
@@ -63,9 +64,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		table.setHDC(hdc);
 		table.draw();
 
-		TextFormatter::drawEllipticalText(hdc, TextFormatter::ELLIPTICAL_TEXT, TextFormatter::COORD_X, 
-			TextFormatter::COORD_Y, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H);
-
+		GetTextExtentPoint(hdc, &TextFormatter::ELLIPTICAL_TEXT[0], 1, &letterSize);
+		TextFormatter::drawEllipticalText(hdc, TextFormatter::ELLIPTICAL_TEXT, { TextFormatter::COORD_X,
+			TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy);
+		
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
