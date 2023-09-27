@@ -25,14 +25,14 @@ namespace ProjConst
 
 	const LPCWSTR TEXT[]
 	{
-		L"TEst",
+		L"Testing multiline text. It shold jump to the next line soon. Just wait for it.",
+		L"Test",
 		L"Phrase",
-		L"For",
-		L"Changing",
 		L"Font",
-		L"Paramterers",
-		L"Type",
-		L"Height",
-		L"Width"
+		L"Changing",
+		L"See, it changes, multiple lines appear",
+		L"Empty cell in this line",
+		L"Height and width are changing!",
+		L""
 	};
 }
