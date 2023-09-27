@@ -48,9 +48,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	RECT wndRect;
 	SIZE letterSize;
+	LOGFONT font{};
+	HFONT hFont{};
 
 	GetWindowRect(hWnd, &wndRect);
 	int width = wndRect.right - wndRect.left;
+	FLOAT fontSize = -((FLOAT)width / ProjConst::WND_INI_WIDTH) * ProjConst::FONT_DEFAULT_SIZE;
 	TableDrawer table(ProjConst::ROWS, ProjConst::COLUMNS, width, ProjConst::TEXT);
 	
 	switch (message) 
@@ -60,13 +63,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-
+		
+		hFont = CreateFont(fontSize, 0, 0, 0, 0, 0, 0, 0, 
+			ANSI_CHARSET, OUT_DEVICE_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, 
+			ProjConst::FONT_TYPE_TERMINAL);
+		//L"Times New Roman");
 		table.setHDC(hdc);
-		table.draw();
+		table.draw(hFont);
+
+		//font.lfHeight = 40;
+		//font.lfWidth = 20;
+		//table.setHDC(hdc);
+		//table.draw(font);
+
+		//SelectObject(hdc, hFont);
+		//table.setHDC(hdc);
+		//table.draw();
 
 		GetTextExtentPoint(hdc, &TextFormatter::ELLIPTICAL_TEXT[0], 1, &letterSize);
 		TextFormatter::drawEllipticalText(hdc, TextFormatter::ELLIPTICAL_TEXT, { TextFormatter::COORD_X,
-			TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy);
+			TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy + 4);
 		
 		EndPaint(hWnd, &ps);
 		break;

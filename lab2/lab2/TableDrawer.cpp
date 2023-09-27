@@ -22,6 +22,39 @@ void TableDrawer::draw()
 {
 	createCells();
 
+	for (int row = 0; row < rows; row++)
+	{
+		int height = getRowHeight(row);
+		drawRow(row, height);
+	}
+
+	drawBorders();
+}
+
+// Draws table with given font
+void TableDrawer::draw(HFONT hFont)
+{
+	createCells();
+
+	SelectObject(hdc, hFont);
+
+	for (int row = 0; row < rows; row++)
+	{
+		int height = getRowHeight(row);
+		drawRow(row, height);
+	}
+
+	drawBorders();
+}
+
+// Draws table with given font
+void TableDrawer::draw(LOGFONT font)
+{
+	createCells();
+
+	HFONT hFont = CreateFontIndirect(&font);
+	SelectObject(hdc, hFont);
+
 	for (int row = 0; row < rows; row++) 
 	{
 		int height = getRowHeight(row);

@@ -10,6 +10,8 @@ public:
 	TableDrawer(int rows, int columns, int width, const LPCWSTR text[]);
 
 	void draw();
+	void draw(HFONT hFont);
+	void draw(LOGFONT font);
 	void setHDC(HDC hdc);
 
 private:

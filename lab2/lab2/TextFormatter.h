@@ -2,11 +2,11 @@
 
 namespace TextFormatter 
 {
-	const wchar_t* ELLIPTICAL_TEXT = L"Ќу зато ты, так сказать, более активен, как вот этот д€тел долб€щий, или муравей, который очень активен в своей стезе, поэтому давай, наши пути здесь, конечно, имеют грани подоби€, потому что всЄ едино, но € - то теб€ прекрасно понимаю, а вот ты мен€ - вр€д ли, потому что € как бы теб€ в себе содержу, всю твою природу, она составл€ет одну маленькую там песчиночку, от того что есть во мне, вот и всЄ, поэтому давай, ступай, езжай, а € пошел наслаждатьс€ прекрасным осенним закатом на берегу теплой южной реки.¬сЄ, ступай, и € пойду.";
+	const wchar_t* ELLIPTICAL_TEXT = L"Dima ne sosat'";
 	const int COORD_X = 800;
 	const int COORD_Y = 800;
 	const int RADIUS_V = 200;
-	const int RADIUS_H = 200;
+	const int RADIUS_H = 300;
 	const double PI = 3.14;
 
 	// Counts max length of text that can be written in given perimeter
