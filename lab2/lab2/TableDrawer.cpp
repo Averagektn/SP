@@ -70,7 +70,7 @@ void TableDrawer::createCells()
 	for (int i = 0; i < rows * columns; i++)
 	{
 		int width = getColWidth();
-		RECT rect{ i % rows * width, 0,  i % rows * width + width, 0 };
+		RECT rect{ (i % columns) * width, 0,  (i % columns) * width + width, 0 };
 		cell.push_back(rect);
 	}
 }

@@ -77,6 +77,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//table.draw(font);
 
 		//SelectObject(hdc, hFont);
+
+		// Uncomment to leave the same font size
 		//table.setHDC(hdc);
 		//table.draw();
 

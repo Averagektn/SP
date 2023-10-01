@@ -21,7 +21,7 @@ namespace ProjConst
 	const int TEXT_FORMAT_COUNT = DT_LEFT | DT_WORDBREAK | DT_CALCRECT | DT_WORD_ELLIPSIS;
 
 	const int ROWS = 3;
-	const int COLUMNS = 3;
+	const int COLUMNS = 4;
 
 	const LPCWSTR TEXT[]
 	{
@@ -33,6 +33,9 @@ namespace ProjConst
 		L"See, it changes, multiple lines appear",
 		L"Empty cell in this line",
 		L"Height and width are changing!",
-		L""
+		L"A",
+		L"B",
+		L"C",
+		L"D"
 	};
 }
