@@ -1,4 +1,4 @@
 #pragma once
 #include "pch.h"
 
-BOOL WINAPI Message(HWND hWnd);
+BOOL WINAPI MessageCircle(HWND hWnd);

@@ -1,9 +1,12 @@
 #include <windows.h>
 #include "Constant.h"
-// static linking
+// static library
 #include "TableDrawer.h"
 // dynamic?
 #include "TextFormatter.h"
+
+// static linking from CircleText.dll
+__declspec(dllimport) BOOL WINAPI MessageCircle(HWND hWnd);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -88,6 +91,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		TextFormatter::drawEllipticalText(hdc, TextFormatter::ELLIPTICAL_TEXT, { TextFormatter::COORD_X,
 			TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy + 4);
 		
+		MessageCircle(hWnd);
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
