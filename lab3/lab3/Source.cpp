@@ -2,8 +2,10 @@
 #include "Constant.h"
 // static library
 #include "TableDrawer.h"
-// dynamic?
+
 #include "TextFormatter.h"
+
+typedef void drawEllipticalText(HDC hdc, const wchar_t* text, POINT center, int vDiameter, int hDiameter, int letterHeight, int ind);
 
 // static linking from CircleText.dll
 __declspec(dllimport) BOOL WINAPI MessageCircle(HWND hWnd);
@@ -55,6 +57,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	SIZE letterSize;
 	LOGFONT font{};
 	HFONT hFont{};
+	HMODULE hModule = LoadLibrary(L"CircleText_Dynamic.dll");
+	drawEllipticalText* pDraw;
+
+	if (hModule != NULL) {
+		pDraw = (drawEllipticalText*)GetProcAddress(hModule, "drawEllipticalText");
+	}
+	else {
+		pDraw = NULL;
+	}
 
 	GetWindowRect(hWnd, &wndRect);
 	int width = wndRect.right - wndRect.left;
@@ -88,13 +99,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//table.draw();
 
 		GetTextExtentPoint(hdc, &TextFormatter::ELLIPTICAL_TEXT[0], 1, &letterSize);
-		TextFormatter::drawEllipticalText(hdc, TextFormatter::ELLIPTICAL_TEXT, { TextFormatter::COORD_X,
-			TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy + 4);
-		
-		MessageCircle(hWnd);
+
+		if (pDraw != NULL) {
+			pDraw(hdc, TextFormatter::ELLIPTICAL_TEXT, { TextFormatter::COORD_X,
+				TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy + 4, 0);
+		}
+
+		if (hModule != NULL) {
+			FreeLibrary(hModule);
+		}
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
+		MessageCircle(hWnd);
 		PostQuitMessage(0);
 		break;
 	default:
