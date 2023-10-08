@@ -15,16 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TableDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Constant.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextFormatter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="CircleText_Static.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TableDrawer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,9 +1,13 @@
 #include <windows.h>
 #include "Constant.h"
+// static linking
+#include "TableDrawer.h"
+// dynamic?
+#include "TextFormatter.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) 
 {
 	WNDCLASSEX wcex;
 	HWND hWnd;
@@ -40,10 +44,52 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	return (int)msg.wParam;
 }
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 {
-	switch (message)
+	HDC hdc;
+	PAINTSTRUCT ps;
+	RECT wndRect;
+	SIZE letterSize;
+	LOGFONT font{};
+	HFONT hFont{};
+
+	GetWindowRect(hWnd, &wndRect);
+	int width = wndRect.right - wndRect.left;
+	FLOAT fontSize = -((FLOAT)width / ProjConst::WND_INI_WIDTH) * ProjConst::FONT_DEFAULT_SIZE;
+	TableDrawer table(ProjConst::ROWS, ProjConst::COLUMNS, width, ProjConst::TEXT);
+	
+	switch (message) 
 	{
+	case WM_SIZE:
+		InvalidateRect(hWnd, NULL, true);
+		break;
+	case WM_PAINT:
+		hdc = BeginPaint(hWnd, &ps);
+		
+		hFont = CreateFont(fontSize, 0, 0, 0, 0, 0, 0, 0, 
+			ANSI_CHARSET, OUT_DEVICE_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, 
+			ProjConst::FONT_TYPE_TERMINAL);
+		//L"Times New Roman");
+		table.setHDC(hdc);
+		table.draw(hFont);
+
+		//font.lfHeight = 40;
+		//font.lfWidth = 20;
+		//table.setHDC(hdc);
+		//table.draw(font);
+
+		//SelectObject(hdc, hFont);
+
+		// Uncomment to leave the same font size
+		//table.setHDC(hdc);
+		//table.draw();
+
+		GetTextExtentPoint(hdc, &TextFormatter::ELLIPTICAL_TEXT[0], 1, &letterSize);
+		TextFormatter::drawEllipticalText(hdc, TextFormatter::ELLIPTICAL_TEXT, { TextFormatter::COORD_X,
+			TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy + 4);
+		
+		EndPaint(hWnd, &ps);
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
