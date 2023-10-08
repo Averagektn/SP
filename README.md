@@ -25,6 +25,18 @@
     - Вписать текст в окружность
 ---
 ## Lab №3:
+  * Изучение создание и использование динамически загружаемых библиотек
+    - Создать dll с функцией поиска по всей виртуальной памяти заданной строки и заменой ее на другую
+    - Разработать программу, которая выполняет статический импорт dll и вызывает ее функцию
+    - Разработать программу, которая выполняет динамический импорт и вызов функции
+    - Разработать программу, которая внедряет dll в заданный процесс и осуществляет ее вызов там
+  * Explore the creation and use of dynamically loaded libraries
+    - Create a dll with a function that searches all virtual memory for a given string and replaces it with another string
+    - Develop a program that performs static import of a dll and calls its function
+    - Develop a program that performs dynamic import and function call
+    - Develop a program that injects a dll into a given process and calls it there
+---
+## Lab №4:
   *
     -
   *
