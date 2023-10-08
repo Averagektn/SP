@@ -58,6 +58,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	LOGFONT font{};
 	HFONT hFont{};
 	HMODULE hModule = LoadLibrary(L"CircleText_Dynamic.dll");
+	LoadLibrary(L"StringReplacer.dll");
 	drawEllipticalText* pDraw;
 
 	if (hModule != NULL) {

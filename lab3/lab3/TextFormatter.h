@@ -8,5 +8,4 @@ namespace TextFormatter
 	const int RADIUS_V = 200;
 	const int RADIUS_H = 300;
 	const double PI = 3.14;
-
 }
