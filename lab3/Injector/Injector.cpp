@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <iostream>
 
-#define DLL_NAME "C:\Archive\5 semester\SP\lab3\StringReplacer\x64\Debug\StringReplacer.dll"
+#define DLL_NAME "..\StringReplacer\x64\Debug\StringReplacer.dll"
 
 BOOL InjectSearchProcessingDll(int pid);
 
@@ -27,9 +27,26 @@ BOOL InjectSearchProcessingDll(int pid)
 {
 	HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
 
+	if (process == NULL)
+	{
+		std::cout << "Error: Cannot open the process.\n";
+		return false;
+	}
+
 	LPVOID funcPointer = (LPVOID)GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "LoadLibraryA");
+	if (funcPointer == NULL)
+	{
+		std::cout << "Error: Cannot load the procedure address from kernel32.dll.\n";
+		return false;
+	}
 
 	LPVOID alloc = VirtualAllocEx(process, 0, strlen(DLL_NAME), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+
+	if (alloc == NULL)
+	{
+		std::cout << "Error: Cannot allocate virtual memory.\n";
+		return false;
+	}
 
 	if (!WriteProcessMemory(process, alloc, DLL_NAME, strlen(DLL_NAME), NULL))
 	{
@@ -38,10 +55,16 @@ BOOL InjectSearchProcessingDll(int pid)
 	}
 
 	HANDLE remoteThread = CreateRemoteThread(process, 0, 0, (LPTHREAD_START_ROUTINE)funcPointer, (LPVOID)alloc, 0, 0);
+	if (remoteThread == NULL)
+	{
+		std::cout << "Error: Cannot create remote thread in the process.\n";
+		return false;
+	}
 
 	std::cout << "Dll was successfully injected.\n";
 	WaitForSingleObject(remoteThread, INFINITE);
 	CloseHandle(remoteThread);
+
 
 	return true;
 }

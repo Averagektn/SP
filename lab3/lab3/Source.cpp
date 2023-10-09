@@ -41,6 +41,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
+	int pid = GetCurrentProcessId();
+
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
@@ -101,7 +103,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		GetTextExtentPoint(hdc, &TextFormatter::ELLIPTICAL_TEXT[0], 1, &letterSize);
 
-		if (pDraw != NULL) {
+		if (pDraw != NULL) 
+		{
 			pDraw(hdc, TextFormatter::ELLIPTICAL_TEXT, { TextFormatter::COORD_X,
 				TextFormatter::COORD_Y }, TextFormatter::RADIUS_V, TextFormatter::RADIUS_H, letterSize.cy + 4, 0);
 		}
