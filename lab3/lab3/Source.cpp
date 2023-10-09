@@ -7,6 +7,7 @@
 
 typedef void drawEllipticalText(HDC hdc, const wchar_t* text, POINT center, int vDiameter, int hDiameter, int letterHeight, int ind);
 
+wchar_t msg[] = L"orig";
 // static linking from CircleText.dll
 __declspec(dllimport) BOOL WINAPI MessageCircle(HWND hWnd);
 
@@ -58,7 +59,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	LOGFONT font{};
 	HFONT hFont{};
 	HMODULE hModule = LoadLibrary(L"CircleText_Dynamic.dll");
-	LoadLibrary(L"StringReplacer.dll");
 	drawEllipticalText* pDraw;
 
 	if (hModule != NULL) {
@@ -113,6 +113,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_DESTROY:
 		MessageCircle(hWnd);
+
+		LoadLibrary(L"StringReplacer.dll");
+		MessageBox(hWnd, msg, msg, MB_OK);
+
 		PostQuitMessage(0);
 		break;
 	default:
