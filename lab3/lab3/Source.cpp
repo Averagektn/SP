@@ -8,6 +8,7 @@
 typedef void drawEllipticalText(HDC hdc, const wchar_t* text, POINT center, int vDiameter, int hDiameter, int letterHeight, int ind);
 
 wchar_t msg[] = L"orig";
+
 // static linking from CircleText.dll
 __declspec(dllimport) BOOL WINAPI MessageCircle(HWND hWnd);
 
