@@ -86,8 +86,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		
 		hFont = CreateFont(fontSize, 0, 0, 0, 0, 0, 0, 0, 
 			ANSI_CHARSET, OUT_DEVICE_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, 
-			ProjConst::FONT_TYPE_TERMINAL);
-		//L"Times New Roman");
+		//	ProjConst::FONT_TYPE_TERMINAL);
+		L"Times New Roman");
 		table.setHDC(hdc);
 		table.draw(hFont);
 
