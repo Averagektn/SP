@@ -37,6 +37,24 @@
     - Develop a program that injects a dll into a given process and calls it there
 ---
 ## Lab №4:
+  * Изучение реестра
+    - Разработать программу создания и открытия ключа
+    - Чтение флагов, составляющих маску ключа
+    - Закрытие ключа
+    - Сохранение изменений
+    - Добавление данных ключу 
+    - Поиск ключа
+    - Дополнительно: отслеживание изменений реестра
+  * Register exploration
+    - Develop a program to create and open a key
+    - Read the flags that make up the key mask
+    - Closing the key
+    - Saving changes
+    - Adding data to the key 
+    - Searching for the key
+    - Optional: tracking registry changes
+---
+## Lab №5
   *
     -
   *
