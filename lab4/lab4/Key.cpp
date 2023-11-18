@@ -3,7 +3,7 @@
 Key::Key(HKEY hKey, LPCWSTR lpSubKey)
 {
 	DWORD keyDisposition;
-
+	this->key = hKey;
 	subKey = lpSubKey;
 	LSTATUS status = RegCreateKeyEx(hKey, lpSubKey, NULL, NULL, NULL,
 		KEY_READ | KEY_WRITE, NULL, &key, &keyDisposition);
@@ -113,7 +113,7 @@ void Key::PrintType(DWORD type)
 	{
 		"Binary data in any form",
 		"A 32-bit number",
-		"A 32-bit number in little-endian format",// == DWORD
+		"A 32-bit number in little-endian format", // == DWORD
 		"A 32-bit number in big-endian format",
 		"A null-terminated string that contains unexpanded references to environment variables",
 		"A null-terminated Unicode string that contains the target path of a symbolic link that was created by calling the RegCreateKeyEx function with REG_OPTION_CREATE_LINK",

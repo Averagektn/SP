@@ -5,14 +5,15 @@
 int main()
 {
 	Key key(HKEY_CURRENT_USER, L"lab4\\NewKey");
-	const BYTE data[]{ 1, 2, 3, 4, 5, 6, 7, 8 };
+	const BYTE data[]{ 89, 22, 11, 12, 13, 14, 15, 16 };
 	int dataSize = 8;
 
-	key.AddValue(L"Value3", REG_QWORD, data, dataSize);
+	key.AddValue(L"Value5", REG_QWORD, data, dataSize);
 	key.Save();
-	key.ReadFlags(L"Value3");
+	key.ReadFlags(L"Value5");
 
 	RegCloseKey(key.GetKey());
+	key.Find(HKEY_CURRENT_USER, L"lab4\\NewKey");
 
 	return 0;
 }

@@ -3,6 +3,7 @@
 
 #define REG_NOTIFY_CHAGES REG_NOTIFY_CHANGE_NAME | REG_NOTIFY_CHANGE_ATTRIBUTES | REG_NOTIFY_CHANGE_LAST_SET | REG_NOTIFY_CHANGE_SECURITY
 
+// If registy key changed, notifies user about it
 bool MonitorRegistryChanges(HKEY hKey) 
 {
     HKEY hMonitorKey;
