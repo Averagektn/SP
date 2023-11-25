@@ -10,13 +10,14 @@
 
 using namespace std;
 
+// Data for sorting threads
 struct ThreadData
 {
     AtomicQueue<string>* q;
     AtomicQueue<string>* result;
 };
 
-
+// Initialization of the queue from file
 void getQ(string fileName, AtomicQueue<string>& q) 
 {
     std::ifstream inputFile(fileName);
@@ -38,6 +39,7 @@ void getQ(string fileName, AtomicQueue<string>& q)
     }
 }
 
+// Sorting algorithm for threads
 DWORD WINAPI sortStrings(LPVOID lpParam)
 {
     ThreadData* threadData = static_cast<ThreadData*>(lpParam);
@@ -55,6 +57,7 @@ DWORD WINAPI sortStrings(LPVOID lpParam)
     return 0;
 }
 
+// Writing results to file and console
 void Output(string fileName, AtomicQueue<string> q)
 {
     cout << q.ToString();

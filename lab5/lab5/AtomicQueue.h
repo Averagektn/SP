@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Thread safe queue with atomic operations
 template<typename T>
 class AtomicQueue
 {
@@ -20,6 +21,7 @@ public:
         DeleteCriticalSection(&criticalSection);
     }
 
+    // Adds element to the queue
     void Enqueue(const T& item)
     {
         EnterCriticalSection(&criticalSection);
@@ -29,6 +31,7 @@ public:
         LeaveCriticalSection(&criticalSection);
     }
 
+    // Removes element from queue if it is not empty to elem parameter, otherwise returns false
     bool Dequeue(T& elem)
     {
         bool isEmpty = true;
@@ -45,16 +48,19 @@ public:
         return isEmpty;
     }
 
+    // Counts current size of the queue NOT THREAD SAFE TO USE
     int Size()
     {
         return q.size();
     }
 
+    // Checks if queue is empty NOT THREAD SAFE TO USE
     bool IsEmpty()
     {
         return q.empty();
     }
 
+    // Converts elements to string. Only for primitive types
     string ToString()
     {
         string res;
