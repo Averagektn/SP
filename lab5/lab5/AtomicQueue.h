@@ -60,7 +60,7 @@ public:
         return q.empty();
     }
 
-    // Converts elements to string. Only for primitive types
+    // Converts elements to string. Only for primitive types NOT THREAD SAFE
     string ToString()
     {
         string res;
@@ -75,7 +75,6 @@ public:
 
         return res;
     }
-
 private:
     CRITICAL_SECTION criticalSection;
     queue<T> q;

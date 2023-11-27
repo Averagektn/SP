@@ -18,13 +18,13 @@ struct ThreadData
 };
 
 // Initialization of the queue from file
-void getQ(string fileName, AtomicQueue<string>& q) 
+static void getQ(string fileName, AtomicQueue<string>& q)
 {
-    std::ifstream inputFile(fileName);
+    ifstream inputFile(fileName);
 
     if (inputFile.is_open()) 
     {
-        std::string line;
+        string line;
 
         while (getline(inputFile, line)) 
         {
@@ -35,12 +35,12 @@ void getQ(string fileName, AtomicQueue<string>& q)
     }
     else 
     {
-        std::cout << "File wasn't open" << std::endl;
+        cout << "File wasn't open" << endl;
     }
 }
 
 // Sorting algorithm for threads
-DWORD WINAPI sortStrings(LPVOID lpParam)
+static DWORD WINAPI sortStrings(LPVOID lpParam)
 {
     ThreadData* threadData = static_cast<ThreadData*>(lpParam);
     string line;
@@ -58,9 +58,10 @@ DWORD WINAPI sortStrings(LPVOID lpParam)
 }
 
 // Writing results to file and console
-void Output(string fileName, AtomicQueue<string> q)
+static void Output(string fileName, AtomicQueue<string> q)
 {
     cout << q.ToString();
+
     ofstream outputFile(fileName);
     if (outputFile.is_open())
     {
@@ -103,7 +104,7 @@ int main()
 
     WaitForMultipleObjects(numThreads, threads, TRUE, INFINITE);
 
-    for (int i = 0; i < numThreads; ++i)
+    for (int i = 0; i < numThreads; i++)
     {
         if (threads[i] != NULL) 
         {
