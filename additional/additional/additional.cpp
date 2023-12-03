@@ -140,33 +140,80 @@ static void CreateBMPFromPixels(const std::vector<RGBTRIPLE>& pixels, int width,
 	CloseHandle(file);
 }
 
-int main() 
+DWORD WINAPI processPixels(LPVOID lpParam) 
 {
-	clock_t start = clock();
-	auto startTime = std::chrono::high_resolution_clock::now();
+	std::vector<RGBTRIPLE>& pixels = *static_cast<std::vector<RGBTRIPLE>*>(lpParam);
 
-	int n = 10;
-	int width = 5184;
-	int height = 3456;
-	std::string filename = "sample_5184x3456.bmp";
-
-	std::vector<RGBTRIPLE> pixels = ReadBMP(filename);
-
-	std::vector<std::vector<RGBTRIPLE>> data = divideVector(pixels, n);
-
-	for (int i = 0; i < pixels.size(); i++)
+	for (int i = 0; i < pixels.size(); i++) 
 	{
 		int color = (pixels[i].rgbtBlue + pixels[i].rgbtGreen + pixels[i].rgbtRed) / 3;
 		RGBTRIPLE pixel{ color, color, color };
 
 		pixels[i] = pixel;
 	}
-	
-	CreateBMPFromPixels(pixels, width, height, L"single_thread.bmp");
+
+	return 0;
+}
+
+std::vector<RGBTRIPLE> mergeVectors(const std::vector<std::vector<RGBTRIPLE>>& vectors) {
+	std::vector<RGBTRIPLE> mergedVector;
+
+	for (const std::vector<RGBTRIPLE>& vec : vectors) 
+	{
+		mergedVector.insert(mergedVector.end(), vec.begin(), vec.end());
+	}
+
+	return mergedVector;
+}
+
+int main() 
+{
+	int n = 20;
+	int width = 5184;
+	int height = 3456;
+	std::string filename = "sample_5184x3456.bmp";
+
+	std::vector<RGBTRIPLE> pixels = ReadBMP(filename);
+	std::vector<std::vector<RGBTRIPLE>> data = divideVector(pixels, n);
+	std::vector<HANDLE> threadHandles(n);
+
+	clock_t start = clock();
+	auto startTime = std::chrono::high_resolution_clock::now();
+
+	// multithreading
+	for (int i = 0; i < n; i++) 
+	{
+		std::vector<RGBTRIPLE>& pixels = data[i];
+		threadHandles[i] = CreateThread(NULL, 0, processPixels, &pixels, 0, NULL);
+		if (threadHandles[i] == NULL) 
+		{
+			std::cerr << "Failed to create thread " << i << std::endl;
+			return 1;
+		}
+	}
+	WaitForMultipleObjects(n, threadHandles.data(), TRUE, INFINITE);
+
+	// single thread
+	//for (int i = 0; i < pixels.size(); i++)
+	//{
+	//	int color = (pixels[i].rgbtBlue + pixels[i].rgbtGreen + pixels[i].rgbtRed) / 3;
+	//	RGBTRIPLE pixel{ color, color, color };
+
+	//	pixels[i] = pixel;
+	//}
 
 	clock_t end = clock();
 	auto endTime = std::chrono::high_resolution_clock::now();
 	double cpuTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+
+	for (const HANDLE& threadHandle : threadHandles) 
+	{
+		CloseHandle(threadHandle);
+	}
+
+	std::vector<RGBTRIPLE> res = mergeVectors(data);
+	
+	CreateBMPFromPixels(res, width, height, L"res.bmp");
 
 	std::cout << cpuTime << std::endl;
 
