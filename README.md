@@ -55,8 +55,17 @@
     - Optional: tracking registry changes
 ---
 ## Lab №5
-  *
-    -
-  *
-    -
+  * Изучение создание и использование потоков и механизмов синхронизации
+    - Разработать очередь заданий в к-ой несколько потоков могут вставлять эл-ты атомарно
+    - Разработать обработчик этой очереди, к-ый извлекает из нее задания и раздаёт заданному кол-ву потоков
+    - Разработать программу к-ая использует очередь заданий и обработчик очереди для сортировки строк в тхт файле: входной поток читает файл в память, нарезает его на части и создаёт несколько заданий на сортировку по числу сортирующих потоков, входной поток помещает их в очередь заданий
+    - Сортирующие потоки извлекают задание, сортируют свои части файла, отдают результаты выходному потоку. Выход ждёт все сортирующие части и мержит их методом сортирующего слияния.
+  * Study the creation and use of threads and synchronization mechanisms
+    - Develop a job queue in which several threads can insert items atomically.
+    - Develop a handler for this queue that retrieves jobs from it and distributes them to a given number of threads.
+    - Develop a program that uses a job queue and a queue handler to sort lines in a txt file: the input thread reads the file into memory, slices it into parts and creates several sorting jobs according to the number of sorting threads, the input thread places them in the job queue.
+    - Sorting threads retrieve the job, sort their parts of the file, give the results to the output thread. The output waits for all sorting parts and merges them using the sort merge method.
 ---
+## Additional
+  * Создать многопоточное приложение, которое формирует картинку как баланс серого на исходной
+  * Create a multithreaded application that generates a picture as a gray balance on the original
