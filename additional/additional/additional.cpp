@@ -168,7 +168,7 @@ std::vector<RGBTRIPLE> mergeVectors(const std::vector<std::vector<RGBTRIPLE>>& v
 
 int main() 
 {
-	int n = 20;
+	int n = MAXIMUM_WAIT_OBJECTS;
 	int width = 5184;
 	int height = 3456;
 	std::string filename = "sample_5184x3456.bmp";
@@ -191,14 +191,14 @@ int main()
 			return 1;
 		}
 	}
-	WaitForMultipleObjects(n, threadHandles.data(), TRUE, INFINITE);
+	HANDLE* handles = threadHandles.data();
+	DWORD status = WaitForMultipleObjects(n, threadHandles.data(), TRUE, INFINITE);
 
 	// single thread
 	//for (int i = 0; i < pixels.size(); i++)
 	//{
 	//	int color = (pixels[i].rgbtBlue + pixels[i].rgbtGreen + pixels[i].rgbtRed) / 3;
 	//	RGBTRIPLE pixel{ color, color, color };
-
 	//	pixels[i] = pixel;
 	//}
 
@@ -214,6 +214,7 @@ int main()
 	std::vector<RGBTRIPLE> res = mergeVectors(data);
 	
 	CreateBMPFromPixels(res, width, height, L"res.bmp");
+	//CreateBMPFromPixels(pixels, width, height, L"res.bmp");
 
 	std::cout << cpuTime << std::endl;
 
